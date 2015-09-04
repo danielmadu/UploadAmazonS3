@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload to Amazon S3 by danielmadu</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+    <style>
+        html, body { height: 100%; }
+        .jumbotron {
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            text-align: center;
+            width: 50%;
+        }
+
+        .footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h2>Upload to Amazon S3</h2>
+                <form method="POST" action="http://localhost:3000/upload_submit" enctype="multipart/form-data">
+                    <input type="file" name="arquivo"/>
+                    <input type="submit" value="Enviar" />
+                </form>
+            </div>
+        </div>
+        <div class="row footer">by danielmadu</div>
+    </div>
+</body>
+</html>

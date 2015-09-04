@@ -1,0 +1,21 @@
+{
+  "name": "UploadAmazon",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel M Batista",
+  "license": "ISC",
+  "dependencies": {
+    "express": "3.x",
+    "ejs": "*",
+    "aws-sdk": "*"
+  },
+  "devDependencies": {
+    "multer": "^1.0.3",
+    "body-parser": "^1.13.3",
+    "connect-multiparty": "^2.0.0"
+  }
+}
