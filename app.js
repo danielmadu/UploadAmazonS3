@@ -1,33 +1,16 @@
-var express = require('express');
+var app = require('./config/express')();
+var configAws = require('./config/aws');
 var fs = require('fs');
 var aws = require('aws-sdk');
-var bodyParser = require('body-parser');
 var multipart = require('connect-multiparty');
 
 var multipartMiddleware = multipart();
 
-var AWS_ACCESS_KEY = ''; // Não se esqueça de colocar a chave de acesso gerada no console da Amazon
-var AWS_SECRET_KEY = ''; // // Não se esqueça de colocar a chave secrets gerada no console da Amazon
-var S3_BUCKET = 'meu-bucket';
-
 var done = false;
 
-aws.config.update({ accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY });
-
-var app = express();
-
-app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  return next();
-});
-
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-
+aws.config.update({accessKeyId: configAws.AWS_ACCESS_KEY, secretAccessKey: configAws.AWS_SECRET_KEY});
 
 // Rotas
-
 app.get('/upload', function(req, res){
     res.sendfile('views/upload.html');
 });
@@ -40,7 +23,7 @@ app.post('/upload_submit', multipartMiddleware, function(req, res) {
         var base64data = new Buffer(data, 'binary');
         var s3 = new aws.S3();
         s3.putObject({
-            Bucket: S3_BUCKET,
+            Bucket: configAws.S3_BUCKET,
             Key: Date.now() + '-' + req.files.arquivo.name,
             Body: base64data,
             ContentType: req.files.arquivo.type,
@@ -59,5 +42,5 @@ app.post('/upload_submit', multipartMiddleware, function(req, res) {
 
 });
 
-var server = app.listen(3000);
-console.log('Servidor inicializado na porta 3000');
+var server = app.listen(app.get('port'));
+console.log('Servidor inicializado na porta ' + app.get('port'));
