@@ -13,6 +13,6 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-module.exports = function(){
+module.exports = (function(){
     return app;
-};
+})();

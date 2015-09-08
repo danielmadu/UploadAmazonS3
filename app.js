@@ -1,4 +1,4 @@
-var app = require('./config/express')();
+var app = require('./config/express');
 var configAws = require('./config/aws');
 var fs = require('fs');
 var aws = require('aws-sdk');
